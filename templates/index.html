@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>WELCOME  To Marriage Hall</h1>
+
+    <a href="{{ url_for('resis') }}">Reistration</a>
+    <br><br>
+    <a href="{{ url_for('hall') }}">Hall</a>
+    <br><br>
+    <a href="{{ url_for('dated') }}">Dated</a>
+    <br><br>
+    <a href="{{ url_for('fun') }}">function</a>
+    <br><br>
+    <a href="{{ url_for('booking') }}">Booking</a>
+    <br><br>
+    <a href="{{ url_for('menu') }}">Menu</a>
+    <br><br>
+    <a href="{{ url_for('deco') }}">Decoration</a>
+    <br><br>
+    <hr>
+
+
+
+<!--1 This Block For Resistration For Client-->
+    {% block content %}
+
+    {% endblock %}
+
+<!--2 This Block For Hall Related Information-->
+    {% block hall %}
+
+    {% endblock %}
+
+<!--3 This Block For Date Ability related-->
+    {% block date %}
+
+    {% endblock %}
+
+<!--4 This Block For Function Type-->
+    {% block fuction %}
+
+    {% endblock %}
+
+<!--5 This Block For Booking -->
+    {% block booking %}
+
+    {% endblock %}
+
+<!--6 This Block For Decoration Type-->
+    {% block deco %}
+
+    {% endblock %}
+
+{% block footer%}
+<br><br>
+<hr>
+
+<footer>
+    Contect Information-- <br>
+    Emial: marriage@gmail.com <br>
+    Phone: 9876543211 <br>
+    Instagram: marriage_990
+</footer>
+{% endblock%}
+</body>
+</html>
