@@ -1,8 +1,11 @@
 today = new Date();
 currentMonth = today.getMonth();
 currentYear = today.getFullYear();
+
 selectYear = document.getElementById("year");
 selectMonth = document.getElementById("month");
+
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 showCalendar(currentMonth, currentYear);
 
@@ -22,11 +25,14 @@ function prev(){
 
 function showCalendar(month, year){
 
-    firstdate = new Date(year, month).getDay()-1
+    firstdate = new Date(year, month).getDay()-1;
     tbl.innerHTML = "";
     tbl.innerHTML = '<tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Ths</th><th>Fri</th><th>Sat</th><th>Sun</th></tr>'
 
-    date = 1
+    selectMonth.innerHTML = months[month]
+    selectYear.innerHTML = currentYear
+
+    date = 1;
     for(i=0; i < 6; i++){
         tr = document.createElement('tr');
         for(j=0; j< 7; j++){
@@ -43,10 +49,15 @@ function showCalendar(month, year){
     
             else{
                 td = document.createElement('td');
+                td.style.cursor = 'pointer';
                 tdText = document.createTextNode(date)
+                if (today.getDate() == date && today.getFullYear() == year && today.getMonth() == month){
+                    td.style.color = 'red';
+                }
                 td.appendChild(tdText)
                 tr.appendChild(td)
                 date++
+                
             }
         }
         tbl.appendChild(tr)
