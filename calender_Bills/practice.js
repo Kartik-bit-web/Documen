@@ -52,12 +52,15 @@ function showCalendar(month, year){
                 td.style.cursor = 'pointer';
                 tdText = document.createTextNode(date)
                 if (today.getDate() == date && today.getFullYear() == year && today.getMonth() == month){
-                    td.style.color = 'red';
+                    td.style.color = 'blue';
                 }
+                else{
+                    td.style.color = 'green';
+                }
+
                 td.appendChild(tdText)
                 tr.appendChild(td)
-                date++
-                
+                date++ 
             }
         }
         tbl.appendChild(tr)
@@ -67,3 +70,4 @@ function showCalendar(month, year){
 function daysInMonth(iMonth, iyear){
     return 32 - new Date(iMonth, iyear, 32).getDate();
 }
+
