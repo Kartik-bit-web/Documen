@@ -7,7 +7,7 @@ r = requests.get(url)
 
 # If extension does not exist in end of url, append it
 if file_extension not in url.split("/")[-1]:
-        filename = f'{file_extension}{file_extension}'
+        filename = f'{url[31:40]}{file_extension}'
 # Else take the last part of the url as filename
 else:
         filename = url.split("/")[-1]

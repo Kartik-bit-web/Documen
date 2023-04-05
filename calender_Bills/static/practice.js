@@ -50,20 +50,35 @@ function showCalendar(month, year){
             else{
                 td = document.createElement('td');
                 td.style.cursor = 'pointer';
+
+                alink = document.createElement('a')
+
+                att = document.createAttribute('href')
+                att.value = " /event"
+                alink.setAttributeNode(att)
+                      
                 tdText = document.createTextNode(date)
                 if (today.getDate() == date && today.getFullYear() == year && today.getMonth() == month){
-                    td.style.color = 'blue';
+                    alink.appendChild(tdText)
+                    td.appendChild(alink)
+                    tr.appendChild(td)
+                    console.log(td)
+                    date++
                 }
+                
                 else{
-                    td.style.color = 'green';
-                }
+                    alink.appendChild(tdText)
+                    td.appendChild(alink)
+                    tr.appendChild(td)
+                    console.log()
+                    date++
 
-                td.appendChild(tdText)
-                tr.appendChild(td)
-                date++ 
+                }
+                 
             }
         }
         tbl.appendChild(tr)
+        console.log(tr)
     }
 }
 
