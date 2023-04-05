@@ -2,14 +2,14 @@
 {% block content %}
 <body>
     <h3>Create Event:-</h3>
-    <input type="submit" name="sub" id="" value="Create Event">
+
     
-    <form action="">
-        <p id="months"></p>
-        <p id="years"></p>
-        <p id="day"></p>
     
-        <select id="">
+    <form action="http://localhost:5000/eve" method="post">
+
+        <input type="date" name="date" id="">
+    
+        <select name="opt" id="">
             <option value="select_Type">Select Type</option>
             <option value="Marriage">Marriage</option>
             <option value="Function">Function</option>
@@ -20,26 +20,21 @@
         <br>
         <br>
 
-        <label for="pay_type">Name: </label>
-        <input type="text" name="" id="">
+        <label for="name">Name: </label>
+        <input type="text" name="on" id="">
         <br>
         <br>
 
-        <label for="pay_type">Number: </label>
-        <input type="text" name="" id="">
+        <label for="Number">Number: </label>
+        <input type="text" name="num" id="">
         <br>
         <br>
 
-        <label for="pay_type">Total-Amount: </label>
-        <input type="text" name="" id="">
+        <label for="amount">Total-Amount: </label>
+        <input type="text" name="amount" id="">
         <br>
         <br>
 
-        <label for="pay_type">Add-Amount: </label>
-        <input type="text" name="" id="">
-        <br>
-        <br>
-        
         <input type="submit" value="Book Appoinment">
 
     </form>
