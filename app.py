@@ -30,7 +30,7 @@ def booking():
 def menu():
     return render_template('menu.html')
 
-@app.route('/deco')
-def deco():
-    return render_template('deco.html')
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
 
