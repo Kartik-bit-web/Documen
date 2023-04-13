@@ -4,18 +4,21 @@
 <h2>Registration</h2>
 <form action="" method="post">
     <label for="name">First Name: </label>
-    <input type="text" name="" id="nm" required>
+    <input type="text" name="nam" id="nm" required>
     <br><br>
     
     <label for="Email">Email: </label>
-    <input type="text" name="" id="em" required>
+    <input type="text" name="email" id="em" required>
     <br><br>
 
     <label for="Number">Number (Optional): </label>
-    <input type="text" name="" id="num">
+    <input type="text" name="num" id="num">
     <br><br>
 
     <button>Submit</button>
 </form>
+<br>
+<a href="{{url_for('admin')}}"> LogIn as Admin</a><br>
+<a href="{{url_for('login')}}"> LogIn </a>
 
 {% endblock %}

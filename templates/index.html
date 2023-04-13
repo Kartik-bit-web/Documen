@@ -11,6 +11,7 @@
 </head>
 <body>
     <h1>WELCOME  To Marriage Hall</h1>
+    <h4>{{email}}</h4>
 
     <a href="{{ url_for('resis') }}">Reistration</a>
     <br><br>
@@ -64,6 +65,12 @@
     {% block blog %}
 
     {% endblock %}
+
+<!--8 This Block for Login-->
+    {% block login %}
+    
+    {% endblock %}
+
 
 {% block footer%}
 <br><br>

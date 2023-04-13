@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% block login %}
+
+<form action="/logIn" method="post">
+    <label for="Email">Email: </label>
+    <input type="text" name="email" id="em" required>
+    <br><br>
+
+    <button>Submit</button>
+
+</form>
+
+
+{% endblock %}
