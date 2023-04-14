@@ -24,11 +24,11 @@ def resis():
     else:
         return render_template('resis.html')
 
+#Login For those who Just create acccount --------->
 @app.route('/logIn', methods = ['POST', 'GET'])
 def login():
     if request.method == 'POST':
         emails = request.form.get('email')
-        print(emails)
         check = login_user.engine.execute("Select * from info ")
         x = check.fetchall()
         for i in x:
@@ -38,14 +38,27 @@ def login():
     else:
         return render_template('login.html')
 
-@app.route('/admin')
+#Admin Login Page Here --------->
+@app.route('/admin', methods = ['POST', 'GET'])
 def admin():
-    return render_template('/admin/login_as_admin.html')
+    if request.method == 'POST':
+        emails = request.form.get('email')
+        psd = request.form.get('psd')
+        check = login_user.engine.execute("Select * from admin_info")
+        x = check.fetchall()
+        for i in x:
+            if i['email'] == emails and i['password'] == psd:
+                return redirect('/Dashboard')
+            return redirect('/admin')
+    else:
+        return render_template('/admin/login_as_admin.html')
+    
+#Regsistration Page End  --------->
 
-
-
-
-
+#Admin Dashboard --------->
+@app.route('/Dashboard')
+def dash():
+    return render_template('/admin/admin_index.html')
 
 
 
@@ -53,6 +66,34 @@ def admin():
 @app.route('/hall')
 def hall():
     return render_template('hall.html')
+
+#Hall for admin page --------->
+@app.route('/admin_hall')
+def admin_hall():
+    getHall = login_user.engine.execute('Select * from post_hall')
+    x = getHall.fetchall()
+    return render_template('admin/admin_hall.html', x=x)
+
+@app.route('/create_post', methods= ["POST", "GET"])
+def create_post():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        cmt = request.form.get('cmt')
+        login_user.hall_post(title, cmt)
+        return redirect('/admin_hall')
+    return render_template('admin/create_post.html')
+
+@app.route('/edit_post', methods= ["POST", "GET"])
+def edit_post():
+    pass
+
+
+
+
+
+
+
+
 
 #Date watching --------->
 @app.route('/dated')

@@ -1,0 +1,19 @@
+{% extends "admin/admin_index.html" %}
+{% block admin_content %}
+
+<h2>WELCOME to admin hall</h2>
+
+{% for i in x: %}
+<a href="">Edit</a>
+<a href="">Delete</a>
+<div>
+    <h1> {{i['title']}} </h1><br>
+    <img src="#" alt="img of Classic hall"><br>
+    <h3>{{i['content']}}</h3>
+
+
+</div>
+{% endfor%}
+
+
+{% endblock %}
