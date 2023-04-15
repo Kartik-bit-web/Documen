@@ -15,6 +15,9 @@
     <a href="{{ url_for('meet_date') }}">Show Meeting date</a>
     <br>
     <a href="{{ url_for('admin_menu') }}">Add Your Menu</a>
+    <br>
+    <a href="{{ url_for('admin_blog') }}">Add Blog</a>
+
 
     {% block admin_content %}
 
@@ -39,6 +42,16 @@
     {% block edit_menu %}
 
     {% endblock%}
+
+    {% block admin_blog %}
+
+    {% endblock%}
+
+    {% block edit_blog %}
+
+    {% endblock%}
+
+
 
 </body>
 </html>

@@ -142,6 +142,7 @@ def menu():
     x = getDate.fetchall()
     return render_template('menu.html', x=x)
 
+#menu for admin can control --->
 @app.route('/admin_menu', methods= ['POST', 'GET'])
 def admin_menu():
     if request.method == 'POST':
@@ -158,6 +159,7 @@ def admin_menu():
 
     return render_template('admin/admin_menu.html', x=x)
 
+#edit menu---->
 @app.route('/edit_menu/<int:id>', methods= ['POST', 'GET'])
 def edit_menu(id):
     if request.method == 'POST':
@@ -171,19 +173,53 @@ def edit_menu(id):
     
     return render_template('/admin/edit_menu.html')
 
+#Delete the menu----->
 @app.route('/del_menu/<int:id>', methods= ['POST', 'GET'])
 def del_menu(id):
     delQuery = "delete from menu_add where id=?"
     login_user.engine.execute(delQuery, id)
     return redirect('/admin_hall')
 
-
-
-
-
+#Menu is end here ------------------------->
 
 
 #Blog For every can rating Us --------->
 @app.route('/blog')
 def blog():
-    return render_template('blog.html')
+    get_it = login_user.engine.execute('Select * from blog_add')
+    x =get_it.fetchall()
+    return render_template('blog.html', x=x)
+
+@app.route('/create_blog', methods=['POST', 'GET'])
+def create_blog():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        post = request.form.get('post')
+        login_user.blog(title, post)
+        return redirect('/blog')
+    
+    return render_template('create_blog.html')
+
+@app.route('/admin_blog', methods=['POST', 'GET'])
+def admin_blog():
+    get_it = login_user.engine.execute('Select * from blog_add')
+    x =get_it.fetchall()
+    return render_template('/admin/admin_blog.html', x=x)
+
+@app.route('/edit_blog/<int:id>', methods=['POST', 'GET'])
+def edit_blog(id):
+    if request.method == 'POST':
+        title = request.form.get('title')
+        post = request.form.get('post')
+        get_it = ('update blog_add set title=?, post=? where id=?')
+        exe = (title, post, id)
+        login_user.engine.execute(get_it, exe)
+        return redirect('/blog')
+    
+    return render_template('/admin/edit_blog.html')
+
+@app.route('/del_blog/<int:id>', methods=['POST', 'GET'])
+def del_blog(id):
+    get_it = 'Delete from blog_add where id=?'
+    login_user.engine.execute(get_it, id)
+    return redirect('/blog')
