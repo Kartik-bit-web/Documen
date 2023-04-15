@@ -1,7 +1,25 @@
 {% extends "index.html" %}
 {% block menu %}
-<h1>This is menu</h1>
 
+<h2>Here Is List of menu:- </h2>
+<table>
+    <tr>
+        <th>Started</th>
+        <th>Breakfast</th>
+        <th>Lunch</th>
+        <th>Dinner</th>
+        <th>Specail</th>
+    </tr>
+    {% for i in x: %}
+    <tr>
+        <td>{{i['started']}}</td>
+        <td>{{i['breakfast']}}</td>
+        <td>{{i['lunch']}}</td>
+        <td>{{i['dinner']}}</td>
+        <td>{{i['special']}}</td>
+    </tr>
+    {% endfor %}
+</table>
 
  
 {% endblock %}

@@ -1,0 +1,57 @@
+{% extends "admin/admin_index.html" %}
+{% block admin_menu %}
+
+<h2>Add your Items Here:- </h2>
+<form action="" method="post">
+    <label for="started">Started:</label>
+    <input type="text" name="st" id="">
+    <input type="file" name="" id="">
+    <br>
+    <br>
+    <label for="Breakfast">Breakfast: </label>
+    <input type="text" name="bf" id="">
+    <input type="file" name="" id="">
+    <br>
+    <br>
+    <label for="Lunch">Lunch: </label>
+    <input type="text" name="lh" id="">
+    <input type="file" name="" id="">
+    <br>
+    <br>
+    <label for="Dinner">Dinner: </label>
+    <input type="text" name="dn" id="">
+    <input type="file" name="" id="">
+    <br>
+    <br>
+    <label for="Specail">Specail: </label>
+    <input type="text" name="sp" id="">
+    <input type="file" name="" id="">
+    <br>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+<h2>Here Is List of menu:- </h2>
+<table>
+    <tr>
+        <th>Started</th>
+        <th>Breakfast</th>
+        <th>Lunch</th>
+        <th>Dinner</th>
+        <th>Specail</th>
+    </tr>
+    {% for i in x: %}
+    <tr>
+        <td>{{i['started']}}</td>
+        <td>{{i['breakfast']}}</td>
+        <td>{{i['lunch']}}</td>
+        <td>{{i['dinner']}}</td>
+        <td>{{i['special']}}</td>
+        <td><a href="{{url_for('edit_menu', id=i['id'] ) }}">Edit</a></td>
+        <td><a href="{{url_for('del_menu', id=i['id'] ) }}">Delete</a></td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock%}

@@ -65,7 +65,9 @@ def dash():
 #Hall page --------->
 @app.route('/hall')
 def hall():
-    return render_template('hall.html')
+    get_it = login_user.engine.execute("Select * from post_hall")
+    x = get_it.fetchall()
+    return render_template('hall.html', x=x)
 
 #Hall for admin page --------->
 @app.route('/admin_hall')
@@ -83,13 +85,22 @@ def create_post():
         return redirect('/admin_hall')
     return render_template('admin/create_post.html')
 
-@app.route('/edit_post', methods= ["POST", "GET"])
-def edit_post():
-    pass
+@app.route('/edit_post/<id>', methods= ["POST", "GET"])
+def edit_post(id):
+    if request.method == 'POST':
+        title = request.form.get('title')
+        cmt = request.form.get('cmt')
+        login_user.hall_edit(title, cmt, id)
+        return redirect('/admin_hall')
+        
+    return render_template('/admin/edit_post.html')
 
 
-
-
+@app.route('/del_post/<id>')
+def del_post(id):
+    delQuery = "delete from post_hall where id=?"
+    login_user.engine.execute(delQuery, id)
+    return redirect('/admin_hall')
 
 
 
@@ -100,20 +111,77 @@ def edit_post():
 def dated():
     return render_template('dated.html')
 
-#Function Organisation page --------->
-@app.route('/function')
-def fun():
-    return render_template('fun.html')
+
+
 
 #Booking Details page --------->
-@app.route('/booking')
+@app.route('/booking', methods = ["POST", "GET"])
 def booking():
+    if request.method == 'POST':
+        nm = request.form.get('nm')
+        dated = request.form.get('dated')
+        login_user.meeting(nm, dated)
+        return redirect('/hall')
     return render_template('booking.html')
+
+@app.route('/meeting')
+def meet_date():
+    getDate = login_user.engine.execute('Select * from meet_date')
+    x = getDate.fetchall()
+    return render_template('/admin/show_meet_date.html', x=x)
+#Booking Details page Ended here --------->
+
+
+
+
 
 #Menus for Functions page --------->
 @app.route('/menu')
 def menu():
-    return render_template('menu.html')
+    getDate = login_user.engine.execute('Select * from menu_add')
+    x = getDate.fetchall()
+    return render_template('menu.html', x=x)
+
+@app.route('/admin_menu', methods= ['POST', 'GET'])
+def admin_menu():
+    if request.method == 'POST':
+        st = request.form.get('st')
+        bf = request.form.get('bf')
+        lh = request.form.get('lh')
+        dn = request.form.get('dn')
+        sp = request.form.get('sp')
+        login_user.menu_admin(st, bf, lh, dn, sp)
+        return redirect('/admin_menu')
+    
+    getDate = login_user.engine.execute('Select * from menu_add')
+    x = getDate.fetchall()
+
+    return render_template('admin/admin_menu.html', x=x)
+
+@app.route('/edit_menu/<int:id>', methods= ['POST', 'GET'])
+def edit_menu(id):
+    if request.method == 'POST':
+        st = request.form.get('st')
+        bf = request.form.get('bf')
+        lh = request.form.get('lh')
+        dn = request.form.get('dn')
+        sp = request.form.get('sp')
+        login_user.update_menu(st, bf, lh, dn, sp, id)
+        return redirect('/admin_menu')
+    
+    return render_template('/admin/edit_menu.html')
+
+@app.route('/del_menu/<int:id>', methods= ['POST', 'GET'])
+def del_menu(id):
+    delQuery = "delete from menu_add where id=?"
+    login_user.engine.execute(delQuery, id)
+    return redirect('/admin_hall')
+
+
+
+
+
+
 
 #Blog For every can rating Us --------->
 @app.route('/blog')

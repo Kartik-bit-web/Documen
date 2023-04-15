@@ -2,32 +2,14 @@
 {% block hall %}
 
 <h1>This is Hall</h1>
+
+{% for i in x: %}
 <div>
-    <h1 href="#"> Open Hall Marriage </h1><br>
+    <h1> {{i['title']}} </h1><br>
     <img src="#" alt="img of open hall"><br>
-    <button>Select</button> <br>
-    <button>More Pictures</button>
+    <h3>{{i['content']}}</h3>
 </div>
+{% endfor%}
 
-<div>
-    <h1 href="#"> Classic Marriage Hall </h1><br>
-    <img src="#" alt="img of Classic hall"><br>
-    <button>Select</button><br>
-    <button>More Pictures</button>
 
-</div>
-
-<div>
-    <h1 href="#"> Menually Set-up Marriage Hall </h1><br>
-    <img src="#" alt="img of menually"><br>
-    <button>Select</button><br>
-    <button>More Pictures</button>
-</div>
-
-<div>
-    <h1 href="#"> Under Bugust Marriage Hall </h1><br>
-    <img src="#" alt="img of Under Bugust "><br>
-    <button>Select</button><br>
-    <button>More Pictures</button>
-</div>
 {% endblock %}

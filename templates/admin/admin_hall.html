@@ -4,8 +4,8 @@
 <h2>WELCOME to admin hall</h2>
 
 {% for i in x: %}
-<a href="">Edit</a>
-<a href="">Delete</a>
+<a href="{{url_for('edit_post', id=i['id'])}}">Edit</a>
+<a href="{{url_for('del_post', id=i['id'])}}">Delete</a>
 <div>
     <h1> {{i['title']}} </h1><br>
     <img src="#" alt="img of Classic hall"><br>

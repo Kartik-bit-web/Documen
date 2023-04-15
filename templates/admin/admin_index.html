@@ -9,7 +9,12 @@
 <body>
     <h2>WELCOME To Admin {{name}} </h2>
     <a href="{{ url_for('admin_hall')}}">Hall for Post</a>
+    <br>
     <a href="{{ url_for('create_post')}}">create Hall</a>
+    <br>
+    <a href="{{ url_for('meet_date') }}">Show Meeting date</a>
+    <br>
+    <a href="{{ url_for('admin_menu') }}">Add Your Menu</a>
 
     {% block admin_content %}
 
@@ -18,5 +23,22 @@
     {% block create_post %}
 
     {% endblock %}
+
+    {% block edit_post %}
+
+    {% endblock %}
+
+    {% block meeting_date %}
+
+    {% endblock %}
+
+    {% block admin_menu %}
+
+    {% endblock %}
+
+    {% block edit_menu %}
+
+    {% endblock%}
+
 </body>
 </html>

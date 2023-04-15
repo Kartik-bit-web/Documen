@@ -1,0 +1,17 @@
+{% extends "admin/admin_index.html" %}
+{% block edit_post %}
+
+<form action="" method="post">
+    <label for="">Title Edit</label>
+    <input type="text" name="title" id=""><br>
+    <br>
+    <label for="">File edit</label>
+    <input type="file" name="file" id=""><br>
+    <br>
+    <label for="">Post Content edit</label>
+    <input type="text" name="cmt" id=""><br>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "admin/admin_index.html" %}
+{% block meeting_date %}
+
+<h3>here is meeting date</h3>
+  <table>
+    <tr>
+        <th>Name</th>
+        <th>Date</th>
+    </tr>
+    {%for i in x: %}
+    <tr>
+        <td>{{i['name']}}</td>
+        <td>{{i['dated']}}</td>
+    </tr>
+
+    {% endfor%}
+   </table>
+{% endblock%}
