@@ -142,6 +142,22 @@ def deleteHere(id):
 
     return redirect('/date_data')
 
+#Date shown for Users here------>
+@app.route('/date_shown', methods=['POST', 'GET'])
+def date_shown():
+    if request.method == 'POST':
+        dates = request.form.get('dates')
+        result = 'SELECT dated FROM date_data'
+        show = login_user.engine.execute(result)
+        x = show.fetchall()
+        for i in x:
+            if i['dated'] == dates:
+                return 'Alread Booked on this date'
+            return 'Booking Avalible'
+
+    return render_template('/date_shown.html')
+    
+
 #Date watching for admin page End  here--------->
 
 
@@ -184,7 +200,6 @@ def admin_menu():
     
     getDate = login_user.engine.execute('Select * from menu_add')
     x = getDate.fetchall()
-
     return render_template('admin/admin_menu.html', x=x)
 
 #edit menu---->

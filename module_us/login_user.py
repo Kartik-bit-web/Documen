@@ -107,3 +107,5 @@ def update_date(dated, option, name, number, id):
     engine.execute(startup, add_it)
 
 metadata.create_all(engine)
+
+conn.close()
