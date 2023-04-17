@@ -44,6 +44,16 @@ blog_add = db.Table('blog_add', metadata,
                 db.Column('post', db.Text())
                 )
 
+date_data = db.Table('date_data', metadata,
+                db.Column('id', db.Integer(), primary_key= True, autoincrement=True),
+                db.Column('dated', db.String(50)),
+                db.Column('option', db.String(50)),
+                db.Column('name', db.String(50)),
+                db.Column('number', db.Integer)
+                )
+
+
+
 
 
 def exe(nam, email, num):
@@ -87,5 +97,13 @@ def blog(title, post):
     getblog = db.insert(blog_add).values(title=title, post=post)
     engine.execute(getblog)
     
+def data_date(dated, option, name, number):
+    starts = db.insert(date_data).values(dated= dated, option=option, name=name, number=number)
+    engine.execute(starts)
+
+def update_date(dated, option, name, number, id):
+    startup = "Update date_data set dated=?, option=?, name=?, number=? where id=?"
+    add_it = (dated, option, name, number, id)
+    engine.execute(startup, add_it)
 
 metadata.create_all(engine)

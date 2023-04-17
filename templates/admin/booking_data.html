@@ -1,0 +1,28 @@
+{% extends "admin/index_date.html"%}
+{% block booking %}
+<h2>Booking Info Here </h2>
+
+
+{% for book in x%}
+
+    <h3>{{ book.dated }}</h3>
+    <a href="{{ url_for('edit_event', id = book.id)}}">edit</a>
+    <a href="{{ url_for('deleteHere', id = book.id)}}">Delete</a>
+    <br>
+    <label for="name">Name: {{book.name}}</label> 
+    <br>
+
+    <label for="opts">options: {{book.option}}</label> 
+    <br>
+
+    <label for="Number">Number: {{book.number}}</label> 
+
+    
+{% endfor %}
+
+{% block edit %}
+
+{% endblock %}
+
+
+{% endblock%}

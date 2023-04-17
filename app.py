@@ -9,9 +9,6 @@ def hel():
     return render_template('index.html', name='kartik')
 
 
-
-
-
 #Registration page --------->
 @app.route('/register', methods = ['POST', 'GET'])
 def resis():
@@ -61,7 +58,6 @@ def dash():
     return render_template('/admin/admin_index.html')
 
 
-
 #Hall page --------->
 @app.route('/hall')
 def hall():
@@ -95,7 +91,6 @@ def edit_post(id):
         
     return render_template('/admin/edit_post.html')
 
-
 @app.route('/del_post/<id>')
 def del_post(id):
     delQuery = "delete from post_hall where id=?"
@@ -103,15 +98,51 @@ def del_post(id):
     return redirect('/admin_hall')
 
 
-
-
-
-#Date watching --------->
+#Date watching for admin page --------->
 @app.route('/dated')
-def dated():
-    return render_template('dated.html')
+def date_index():
+    return render_template('admin/index_date.html')
 
+@app.route('/date_data')
+def booking_data():
+    result = 'SELECT * FROM date_data'
+    show = login_user.engine.execute(result)
+    x = show.fetchall()
+    return render_template('admin/booking_data.html', x=x)
 
+@app.route('/create_event', methods= ["POST", "GET"])
+def create_event():
+    if request.method == 'POST':
+        dat = request.form.get('date')
+        opts = request.form.get('opt')
+        nm = request.form.get('on')
+        nums = request.form.get('num')
+        if dat=='' and nums== '' and nm=='':
+            return redirect('/event')
+        else:
+            login_user.data_date(dat, opts, nm, nums)
+            return redirect('/Dashboard')
+    
+    return render_template('admin/createEvent.html')
+
+@app.route('/edit_event/<id>', methods= ["POST", "GET"])
+def edit_event(id):
+    if request.method == 'POST':
+        dat = request.form.get('date')
+        opts = request.form.get('opt')
+        nm = request.form.get('on')
+        nums = request.form.get('num')
+        login_user.update_date(dat, opts, nm, nums, id)
+    return render_template('admin/editEvent.html')
+
+@app.route('/deleteBooking/<id>', methods=['POST', 'GET'])
+def deleteHere(id):
+    delQuery = "delete from date_data where id=?"
+    login_user.engine.execute(delQuery, id)
+
+    return redirect('/date_data')
+
+#Date watching for admin page End  here--------->
 
 
 #Booking Details page --------->
@@ -130,9 +161,6 @@ def meet_date():
     x = getDate.fetchall()
     return render_template('/admin/show_meet_date.html', x=x)
 #Booking Details page Ended here --------->
-
-
-
 
 
 #Menus for Functions page --------->
@@ -214,7 +242,7 @@ def edit_blog(id):
         get_it = ('update blog_add set title=?, post=? where id=?')
         exe = (title, post, id)
         login_user.engine.execute(get_it, exe)
-        return redirect('/blog')
+        return redirect('/Dashboard')
     
     return render_template('/admin/edit_blog.html')
 
@@ -222,4 +250,4 @@ def edit_blog(id):
 def del_blog(id):
     get_it = 'Delete from blog_add where id=?'
     login_user.engine.execute(get_it, id)
-    return redirect('/blog')
+    return redirect('/Dashboard')
