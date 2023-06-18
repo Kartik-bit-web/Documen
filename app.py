@@ -1,174 +1,71 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, Blueprint
 from module_us import login_user
 
+from router.registeration import register
+from router.login_user import loginn
+from router.admin_login.admin_login import admin_login
+from router.admin_login.admin_in import admin_main
+from router.hall import hall_in
+from router.date_shown import date_selection
+from router.booking import booking_in
+from router.menu import menu_in
+from router.blog import blog_in
+
+
 app = Flask(__name__)
+
+blueprint = Blueprint()
 
 #Indexing page --------->
 @app.route('/')
 def hel():
-    return render_template('index.html', name='kartik')
+    return render_template('index.html')
 
 
 #Registration page --------->
+app.register_blueprint(register , url_prefix="/register")
 @app.route('/register', methods = ['POST', 'GET'])
 def resis():
-    if request.method == 'POST':
-        nam = request.form.get('nam')
-        email = request.form.get('email')
-        num = request.form.get('num')
-        login_user.exe(nam, email, num)
-        return redirect('/register')
-    else:
-        return render_template('resis.html')
+    return render_template('resis.html')
 
 #Login For those who Just create acccount --------->
+app.register_blueprint(loginn , url_prefix="/loginn")
 @app.route('/logIn', methods = ['POST', 'GET'])
-def login():
-    if request.method == 'POST':
-        emails = request.form.get('email')
-        check = login_user.engine.execute("Select * from info ")
-        x = check.fetchall()
-        for i in x:
-            if i['email'] == emails:
-                return redirect('/hall')
-        return redirect('/logIn')
-    else:
-        return render_template('login.html')
+def loginn():
+    return render_template('login.html')
 
 #Admin Login Page Here --------->
-@app.route('/admin', methods = ['POST', 'GET'])
-def admin():
-    if request.method == 'POST':
-        emails = request.form.get('email')
-        psd = request.form.get('psd')
-        check = login_user.engine.execute("Select * from admin_info")
-        x = check.fetchall()
-        for i in x:
-            if i['email'] == emails and i['password'] == psd:
-                return redirect('/Dashboard')
-            return redirect('/admin')
-    else:
-        return render_template('/admin/login_as_admin.html')
+app.register_blueprint(admin_login , url_prefix="/admin_login")
+@app.route('/admin_login', methods = ['POST', 'GET'])
+def admin(): 
+    return render_template('/admin/login_as_admin.html')
     
-#Regsistration Page End  --------->
 
 #Admin Dashboard --------->
+app.register_blueprint(admin_main , url_prefix="/admin_main")
 @app.route('/Dashboard')
-def dash():
+def admin_dash():
     return render_template('/admin/admin_index.html')
 
 
 #Hall page --------->
+app.register_blueprint(hall_in , url_prefix="/hall")
 @app.route('/hall')
 def hall():
-    get_it = login_user.engine.execute("Select * from post_hall")
-    x = get_it.fetchall()
-    return render_template('hall.html', x=x)
+    return render_template('hall.html')
 
-#Hall for admin page --------->
-@app.route('/admin_hall')
-def admin_hall():
-    getHall = login_user.engine.execute('Select * from post_hall')
-    x = getHall.fetchall()
-    return render_template('admin/admin_hall.html', x=x)
-
-@app.route('/create_post', methods= ["POST", "GET"])
-def create_post():
-    if request.method == 'POST':
-        title = request.form.get('title')
-        cmt = request.form.get('cmt')
-        login_user.hall_post(title, cmt)
-        return redirect('/admin_hall')
-    return render_template('admin/create_post.html')
-
-@app.route('/edit_post/<id>', methods= ["POST", "GET"])
-def edit_post(id):
-    if request.method == 'POST':
-        title = request.form.get('title')
-        cmt = request.form.get('cmt')
-        login_user.hall_edit(title, cmt, id)
-        return redirect('/admin_hall')
-        
-    return render_template('/admin/edit_post.html')
-
-@app.route('/del_post/<id>')
-def del_post(id):
-    delQuery = "delete from post_hall where id=?"
-    login_user.engine.execute(delQuery, id)
-    return redirect('/admin_hall')
-
-
-#Date watching for admin page --------->
-@app.route('/dated')
-def date_index():
-    return render_template('admin/index_date.html')
-
-@app.route('/date_data')
-def booking_data():
-    result = 'SELECT * FROM date_data'
-    show = login_user.engine.execute(result)
-    x = show.fetchall()
-    return render_template('admin/booking_data.html', x=x)
-
-@app.route('/create_event', methods= ["POST", "GET"])
-def create_event():
-    if request.method == 'POST':
-        dat = request.form.get('date')
-        opts = request.form.get('opt')
-        nm = request.form.get('on')
-        nums = request.form.get('num')
-        if dat=='' and nums== '' and nm=='':
-            return redirect('/event')
-        else:
-            login_user.data_date(dat, opts, nm, nums)
-            return redirect('/Dashboard')
-    
-    return render_template('admin/createEvent.html')
-
-@app.route('/edit_event/<id>', methods= ["POST", "GET"])
-def edit_event(id):
-    if request.method == 'POST':
-        dat = request.form.get('date')
-        opts = request.form.get('opt')
-        nm = request.form.get('on')
-        nums = request.form.get('num')
-        login_user.update_date(dat, opts, nm, nums, id)
-    return render_template('admin/editEvent.html')
-
-@app.route('/deleteBooking/<id>', methods=['POST', 'GET'])
-def deleteHere(id):
-    delQuery = "delete from date_data where id=?"
-    login_user.engine.execute(delQuery, id)
-
-    return redirect('/date_data')
 
 #Date shown for Users here------>
+app.register_blueprint(date_selection , url_prefix="/date_selection")
 @app.route('/date_shown', methods=['POST', 'GET'])
 def date_shown():
-    if request.method == 'POST':
-        dates = request.form.get('dates')
-        result = 'SELECT dated FROM date_data'
-        show = login_user.engine.execute(result)
-        x = show.fetchall()
-        for i in x:
-            if i['dated'] == dates:
-                return 'Alread Booked on this date'
-            return 'Booking Avalible'
-
     return render_template('/date_shown.html')
     
 
-#Date watching for admin page End  here--------->
-
-
 #Booking Details page --------->
+app.register_blueprint(booking_in , url_prefix="/booking_in")
 @app.route('/booking', methods = ["POST", "GET"])
 def booking():
-    if request.method == 'POST':
-        nm = request.form.get('nm')
-        dated = request.form.get('dated')
-        login_user.meeting(nm, dated)
-        return redirect('/hall')
     return render_template('booking.html')
 
 @app.route('/meeting')
@@ -180,89 +77,14 @@ def meet_date():
 
 
 #Menus for Functions page --------->
+app.register_blueprint(menu_in , url_prefix="/menu_in")
 @app.route('/menu')
 def menu():
-    getDate = login_user.engine.execute('Select * from menu_add')
-    x = getDate.fetchall()
-    return render_template('menu.html', x=x)
-
-#menu for admin can control --->
-@app.route('/admin_menu', methods= ['POST', 'GET'])
-def admin_menu():
-    if request.method == 'POST':
-        st = request.form.get('st')
-        bf = request.form.get('bf')
-        lh = request.form.get('lh')
-        dn = request.form.get('dn')
-        sp = request.form.get('sp')
-        login_user.menu_admin(st, bf, lh, dn, sp)
-        return redirect('/admin_menu')
-    
-    getDate = login_user.engine.execute('Select * from menu_add')
-    x = getDate.fetchall()
-    return render_template('admin/admin_menu.html', x=x)
-
-#edit menu---->
-@app.route('/edit_menu/<int:id>', methods= ['POST', 'GET'])
-def edit_menu(id):
-    if request.method == 'POST':
-        st = request.form.get('st')
-        bf = request.form.get('bf')
-        lh = request.form.get('lh')
-        dn = request.form.get('dn')
-        sp = request.form.get('sp')
-        login_user.update_menu(st, bf, lh, dn, sp, id)
-        return redirect('/admin_menu')
-    
-    return render_template('/admin/edit_menu.html')
-
-#Delete the menu----->
-@app.route('/del_menu/<int:id>', methods= ['POST', 'GET'])
-def del_menu(id):
-    delQuery = "delete from menu_add where id=?"
-    login_user.engine.execute(delQuery, id)
-    return redirect('/admin_hall')
-
-#Menu is end here ------------------------->
+    return render_template('menu.html')
 
 
 #Blog For every can rating Us --------->
+app.register_blueprint(blog_in , url_prefix="/blog_in")
 @app.route('/blog')
 def blog():
-    get_it = login_user.engine.execute('Select * from blog_add')
-    x =get_it.fetchall()
-    return render_template('blog.html', x=x)
-
-@app.route('/create_blog', methods=['POST', 'GET'])
-def create_blog():
-    if request.method == 'POST':
-        title = request.form.get('title')
-        post = request.form.get('post')
-        login_user.blog(title, post)
-        return redirect('/blog')
-    
-    return render_template('create_blog.html')
-
-@app.route('/admin_blog', methods=['POST', 'GET'])
-def admin_blog():
-    get_it = login_user.engine.execute('Select * from blog_add')
-    x =get_it.fetchall()
-    return render_template('/admin/admin_blog.html', x=x)
-
-@app.route('/edit_blog/<int:id>', methods=['POST', 'GET'])
-def edit_blog(id):
-    if request.method == 'POST':
-        title = request.form.get('title')
-        post = request.form.get('post')
-        get_it = ('update blog_add set title=?, post=? where id=?')
-        exe = (title, post, id)
-        login_user.engine.execute(get_it, exe)
-        return redirect('/Dashboard')
-    
-    return render_template('/admin/edit_blog.html')
-
-@app.route('/del_blog/<int:id>', methods=['POST', 'GET'])
-def del_blog(id):
-    get_it = 'Delete from blog_add where id=?'
-    login_user.engine.execute(get_it, id)
-    return redirect('/Dashboard')
+    return render_template('blog.html')
