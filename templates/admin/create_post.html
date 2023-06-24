@@ -1,17 +1,28 @@
 {% extends "admin/admin_index.html" %}
 {% block create_post %}
 
-<form action="" method="post">
-    <label for="">Title</label>
-    <input type="text" name="title" id=""><br>
-    <br>
-    <label for="">File</label>
-    <input type="file" name="file" id=""><br>
-    <br>
-    <label for="">Post Content</label>
-    <input type="text" name="cmt" id=""><br>
-    <br>
-    <input type="submit" value="Submit">
-</form>
+<div class="d-md-flex  justify-content-between">
+    <div>
+        <form action="" method="post">
+            <label for="">Title</label>
+            <input class="form-control" type="text" name="title" id=""><br>
+            <br>
+            <label for="">File</label>
+            <input class="form-control" type="file" name="file" id=""><br>
+            <br>
+            <label for="">Post Content</label>
+            <input class="form-control" type="text" name="cmt" id=""><br>
+            <br>
+            <input class="btn btn-success" type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div>
+        <br>
+        <h4>Here is Another Display</h4>
+    </div>
+
+</div>
+
 
 {% endblock %}

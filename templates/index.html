@@ -15,7 +15,7 @@
 <body style="background-color: black; color: antiquewhite;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" >Marrige Palace</a>
+          <a class="navbar-brand" href="{{ url_for('hel')}}" >Marrige Palace</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -25,19 +25,19 @@
                 <a class="nav-link" href="{{ url_for('resis')}}">Reistration</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Hall</a>
+                <a class="nav-link" href="{{ url_for('hall')}}">Hall</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Date Avilblity</a>
+                <a class="nav-link" href="{{ url_for('date_shown')}}" >Date Avilblity</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Booking</a>
+                <a class="nav-link" href="{{ url_for('booking')}}" >Booking</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Menu</a>
+                <a class="nav-link" href="{{ url_for('menu')}}" >Menu</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Blog</a>
+                <a class="nav-link" href="{{ url_for('blog')}}" >Blog</a>
               </li>
             </ul>
           </div>
@@ -45,6 +45,8 @@
     </nav>
     <hr>
 
+
+    <h3>This is Home </h3>
 
 
 <!--1 This Block For Resistration For Client-->

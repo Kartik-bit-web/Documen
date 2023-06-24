@@ -1,43 +1,60 @@
-from flask import Blueprint, request, redirect, render_template
+from flask import Blueprint, request, redirect, render_template, url_for
 from module_us.login_user import *
 
 admin_main = Blueprint('admin_main', __name__, static_folder="static", template_folder="templates")
 
-@admin_main.route('/Dashboard')
-def admin_dash():
+@admin_main.route('/')
+def admin_dashs():
     return render_template('/admin/admin_index.html')
 
-#Hall for admin page --------->
+#Displaying the Hall for admin page --------->
 @admin_main.route('/admin_hall')
 def admin_hall():
     getHall = engine.execute('Select * from post_hall')
     x = getHall.fetchall()
     return render_template('admin/admin_hall.html', x=x)
 
+#Creating  the post By Admin--------->
 @admin_main.route('/create_post', methods= ["POST", "GET"])
 def create_post():
     if request.method == 'POST':
         title = request.form.get('title')
+        file = request.form.get('file')
         cmt = request.form.get('cmt')
+        if title == '' and cmt == '':
+            return redirect('/')
+        
         hall_post(title, cmt)
         return redirect('/admin_hall')
     return render_template('admin/create_post.html')
 
+#Updateing or Edit the post By Admin--------->
 @admin_main.route('/edit_post/<id>', methods= ["POST", "GET"])
 def edit_post(id):
     if request.method == 'POST':
         title = request.form.get('title')
         cmt = request.form.get('cmt')
+        if title == '' and cmt == '':
+            return 'somthing wrong'
+            
         hall_edit(title, cmt, id)
         return redirect('/admin_hall')
-        
     return render_template('/admin/edit_post.html')
 
+#Deleting the post By Admin--------->
 @admin_main.route('/del_post/<id>')
 def del_post(id):
     delQuery = "delete from post_hall where id=?"
     engine.execute(delQuery, id)
-    return redirect('/admin_hall')
+    return redirect('/admin_main/admin_hall')
+
+
+
+
+
+
+
+# Start From Here -------------------------------------------------->>>>>>>>>>>.
 
 
 #Date watching for admin page --------->
@@ -85,7 +102,6 @@ def deleteHere(id):
     return redirect('/date_data')
 
 #admin menu---->
-
 @admin_main.route('/admin_menu', methods= ['POST', 'GET'])
 def admin_menu():
     if request.method == 'POST':
@@ -121,6 +137,8 @@ def del_menu(id):
     delQuery = "delete from menu_add where id=?"
     engine.execute(delQuery, id)
     return redirect('/admin_hall')
+
+
 
 @admin_main.route('/admin_blog', methods=['POST', 'GET'])
 def admin_blog():
