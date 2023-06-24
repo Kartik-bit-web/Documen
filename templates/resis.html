@@ -1,24 +1,49 @@
 {% extends "index.html" %}
 {% block content %}
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <div id="alert" class="alert alert-primary alert-dismissible fade show" role="alert">
+      <strong> Something Wrong! </strong> {{ message }}
+      </button>
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 <h2>Registration</h2>
-<form action="" method="post">
-    <label for="name">First Name: </label>
-    <input type="text" name="nam" id="nm" required>
-    <br><br>
+
+<div style="margin: auto; width: 50%; padding: 10px;">
+    <form action="" method="post">
+        <label for="name">First Name: </label>
+        <input class="form-control" type="text" name="nam" id="nm" >
+        <br><br>
+        
+        <label for="Email">Email: </label>
+        <input class="form-control" type="text" name="email" id="em" >
+        <br><br>
     
-    <label for="Email">Email: </label>
-    <input type="text" name="email" id="em" required>
-    <br><br>
+        <label for="Number">Number (Optional): </label>
+        <input class="form-control" type="text" name="num" id="num">
+        <br><br>
+    
+        <button class="btn btn-success">Submit</button>
+    </form>
 
-    <label for="Number">Number (Optional): </label>
-    <input type="text" name="num" id="num">
-    <br><br>
+</div>
 
-    <button>Submit</button>
-</form>
 <br>
-<a href="{{url_for('admin')}}"> LogIn as Admin</a><br>
-<a href="{{url_for('login')}}"> LogIn </a>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        window.setTimeout(function() {
+            $("#alert").fadeTo(2000, 1000).slideUp(1000, function(){
+                $(this).remove(); 
+            });
+        }, 1000);
+    });
+
+</script>
 
 {% endblock %}

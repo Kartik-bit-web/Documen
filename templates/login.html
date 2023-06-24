@@ -1,14 +1,16 @@
 {% extends "index.html" %}
 {% block login %}
 
-<form action="/logIn" method="post">
-    <label for="Email">Email: </label>
-    <input type="text" name="email" id="em" required>
-    <br><br>
+<div style="margin: auto; width: 50%; padding: 10px;">
+    <form method="post">
+        <input class="form-control" type="text" name="email" id="em" placeholder="Enter Your E-mail" >
+        <br>
+    
+        <button class="btn btn-success">Submit</button>
+    
+    </form>
+</div>
 
-    <button>Submit</button>
-
-</form>
 
 
 {% endblock %}
