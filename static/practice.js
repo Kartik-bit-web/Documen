@@ -27,14 +27,15 @@ function showCalendar(month, year){
 
     firstdate = new Date(year, month).getDay()-1;
     tbl.innerHTML = "";
-    tbl.innerHTML = '<tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Ths</th><th>Fri</th><th>Sat</th><th>Sun</th></tr>'
+    tbl.innerHTML = '<thead> <tr><th scope="col">Mon</th><th scope="col">Tue</th><th scope="col">Wed</th><th scope="col">Ths</th><th scope="col">Fri</th><th scope="col">Sat</th><th scope="col">Sun</th></tr> </thead>'
 
     selectMonth.innerHTML = months[month]
     selectYear.innerHTML = currentYear
-
+    tbody = document.createElement('tbody')
     date = 1;
     for(i=0; i < 6; i++){
         tr = document.createElement('tr');
+        
         for(j=0; j< 7; j++){
             if(i==0 && j< firstdate){
                 td = document.createElement('td');
@@ -57,7 +58,7 @@ function showCalendar(month, year){
                 alink.setAttributeNode(att2)
 
                 att = document.createAttribute('href')
-                att.value = " /create_event"
+                att.value = " /admin_main/create_event"
                 alink.setAttributeNode(att)
                       
                 tdText = document.createTextNode(date)
@@ -79,8 +80,9 @@ function showCalendar(month, year){
                  
             }
         }
-        tbl.appendChild(tr)
-       
+        tbl.appendChild(tbody)
+        tbody.appendChild(tr)
+        
     }
 }
 

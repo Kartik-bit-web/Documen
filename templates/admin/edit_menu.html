@@ -1,32 +1,44 @@
 {% extends "admin/admin_index.html" %}
 {% block edit_menu %}
-<form action="" method="post">
-    <label for="started">Edit-Started:</label>
-    <input type="text" name="st" id="">
-    <input type="file" name="" id="">
+
+<div style="margin: auto; width: 50%; padding: 30px;">
+    <h3>Edit the Menu Here:- </h3>
     <br>
-    <br>
-    <label for="Breakfast">Edit-Breakfast: </label>
-    <input type="text" name="bf" id="">
-    <input type="file" name="" id="">
-    <br>
-    <br>
-    <label for="Lunch">Edit-Lunch: </label>
-    <input type="text" name="lh" id="">
-    <input type="file" name="" id="">
-    <br>
-    <br>
-    <label for="Dinner">Edit-Dinner: </label>
-    <input type="text" name="dn" id="">
-    <input type="file" name="" id="">
-    <br>
-    <br>
-    <label for="Specail">Edit-Specail: </label>
-    <input type="text" name="sp" id="">
-    <input type="file" name="" id="">
-    <br>
-    <br>
-    <input type="submit" value="Update">
-</form>
+    <form action="" method="post">
+        <label for="started">Edit-Started:</label>
+        <input class="form-control" type="text" name="st" id="">
+        <br>
+        <input class="form-control" type="file" name="" id="">
+        <br>
+        <br>
+        <label for="Breakfast">Edit-Breakfast: </label>
+        <input class="form-control" type="text" name="bf" id="">
+        <br>
+        <input class="form-control" type="file" name="" id="">
+        <br>
+        <br>
+        <label for="Lunch">Edit-Lunch: </label>
+        <input class="form-control" type="text" name="lh" id="">
+        <br>
+        <input class="form-control" type="file" name="" id="">
+        <br>
+        <br>
+        <label for="Dinner">Edit-Dinner: </label>
+        <input class="form-control" type="text" name="dn" id="">
+        <br>
+        <input class="form-control" type="file" name="" id="">
+        <br>
+        <br>
+        <label for="Specail">Edit-Specail: </label>
+        <input class="form-control" type="text" name="sp" id="">
+        <br>
+        <input class="form-control" type="file" name="" id="">
+        <br>
+        <br>
+        <input class="btn btn-success" type="submit" value="Update">
+    </form>
+
+</div>
+
 
 {% endblock%}

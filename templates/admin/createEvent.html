@@ -5,39 +5,44 @@
 
     
     <span>{{error}}</span>
-    <form action="" method="post" >
+    <div style="margin: auto; width: 50%; padding: 10px;">
+        <form action="" method="post" >
 
-        <input type="date" name="date" id="">
+            <input class="form-control" type="date" name="date" id="">
+            <br>
+        
+            <select class="form-control" name="opt" id="">
+                <option value="select_Type">Select Type</option>
+                <option value="Marriage">Marriage</option>
+                <option value="Function">Function</option>
+                <option value="Birthday Party">Birthday Party</option>
+                <option value="Ring_Ceromony">Ring Ceromony</option>
+                <option value="Other">Other</option>
+            </select>
+            <br>
+            <br>
     
-        <select name="opt" id="">
-            <option value="select_Type">Select Type</option>
-            <option value="Marriage">Marriage</option>
-            <option value="Function">Function</option>
-            <option value="Birthday Party">Birthday Party</option>
-            <option value="Ring_Ceromony">Ring Ceromony</option>
-            <option value="Other">Other</option>
-        </select>
-        <br>
-        <br>
+            <label for="name">Name: </label>
+            <input class="form-control" type="text" name="on" id="">
+            <br>
+            <br>
+    
+            <label for="Number">Number: </label>
+            <input class="form-control" type="text" name="num" id="">
+            <br>
+            <br>
+    
+            <label for="amount">Total-Amount: </label>
+            <input class="form-control" type="text" name="amount" id="">
+            <br>
+            <br>
+    
+            <input class="btn btn-success" type="submit" value="Book Appoinment">
+    
+        </form>
 
-        <label for="name">Name: </label>
-        <input type="text" name="on" id="">
-        <br>
-        <br>
-
-        <label for="Number">Number: </label>
-        <input type="text" name="num" id="">
-        <br>
-        <br>
-
-        <label for="amount">Total-Amount: </label>
-        <input type="text" name="amount" id="">
-        <br>
-        <br>
-
-        <input type="submit" value="Book Appoinment">
-
-    </form>
+    </div>
+    
 
 
 </body>

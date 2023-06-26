@@ -1,34 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Calendar:-</h1>
+{% extends "admin/admin_index.html" %}
+{% block create_post %}
+
     
-    <a href="">Show Boooking</a><br>
+    
+    <a href="{{ url_for('admin_main.booking_data')}}">Show Boooking</a><br>
+    <h1>Calendar:-</h1>
+
     <br>
-    <button id="prev" onclick="prev()">Prev</button>
-    <span id="month"></span>
-    <span id="year"></span>
-    <button id="next" onclick="next()">Next</button>
-    <br>
-    <table id="tbl">
-    </table>
+    <div style=" width: 50%; padding: 2%;">
+
+        <div class="d-flex justify-content-around">
+            <div>
+                <button class="btn btn-primary" id="prev" onclick="prev()">Prev</button>
+            </div>
+            
+            <span id="month"></span>
+            <span id="year"></span>
+
+            <div>
+                <button class="btn btn-primary" id="next" onclick="next()">Next</button>
+            </div>
+           
+
+        </div>
+        <br>
+
+        <table class="table table-striped table-dark" id="tbl">
+
+
+
+        </table>
+
+    </div>
+    
 
     {% block content %}
-
-    {% endblock %}
-
     {% block booking %}
 
+    {% endblock %}
     {% endblock %}
     
 
 <script src="/static/practice.js"></script>
 
-</body>
-</html>
+{% endblock %}

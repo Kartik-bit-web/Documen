@@ -1,21 +1,36 @@
 {% extends "admin/index_date.html"%}
 {% block booking %}
-<h2>Booking Info Here </h2>
+<h2>Booking Info Here:- </h2>
 
 
 {% for book in x%}
+    <div >
+        <div style="margin: auto; width: 50%; padding: 2%;">
+            <h3>{{ book.dated }}</h3>
+        </div>
 
-    <h3>{{ book.dated }}</h3>
-    <a href="">edit</a>
-    <a href="">Delete</a>
-    <br>
-    <label for="name">Name: {{book.name}}</label> 
-    <br>
+        <div style="padding: 2%;" class="d-lg-flex justify-content-around">
+            <div>
+                <a href="{{ url_for('admin_main.edit_event', id=book['id'])}}">Edit</a><br>
+                <a href="{{ url_for('admin_main.deleteHere', id=book['id'])}}">Delete</a>
+            </div>
+        
+            <div>
+                <label for="name">Name: {{book.name}}</label> 
+                <br>
+            
+                <label for="opts">options: {{book.option}}</label> 
+                <br>
+            
+                <label for="Number">Number: {{book.number}}</label> 
+            </div>
 
-    <label for="opts">options: {{book.option}}</label> 
-    <br>
-
-    <label for="Number">Number: {{book.number}}</label> 
+        </div>
+        
+        
+    </div>
+    <hr>
+    
 
     
 {% endfor %}

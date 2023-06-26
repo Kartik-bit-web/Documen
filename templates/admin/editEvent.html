@@ -1,9 +1,12 @@
 {% extends "admin/booking_data.html"%}
 {% block edit %}
 <h3>edit:- </h3>
-<form action="" method="post">
-    <input type="date" name="date" id="">
-        <select name="opt" id="">
+
+<div style="margin: auto; width: 50%; padding: 10px">
+    <form action="" method="post">
+        <input class="form-control" type="date" name="date" id="">
+        <br>
+        <select class="form-control" name="opt" id="">
             <option value="select_Type">Select Type</option>
             <option value="Marriage">Marriage</option>
             <option value="Function">Function</option>
@@ -15,20 +18,22 @@
         <br>
 
         <label for="name">Edit-Name: </label>
-        <input type="text" name="on" id="">
+        <input class="form-control" type="text" name="on" id="">
         <br>
         <br>
 
         <label for="Number">Edit-Number: </label>
-        <input type="text" name="num" id="">
+        <input class="form-control" type="text" name="num" id="">
         <br>
         <br>
 
         <label for="amount">Total-Amount: </label>
-        <input type="text" name="amount" id="">
+        <input class="form-control" type="text" name="amount" id="">
         <br>
         <br>
-        <input type="submit" value="edit">
-</form>
+        <input class="btn btn-success" type="submit" value="edit">
+    </form>
+</div>
+
 
 {% endblock%}
