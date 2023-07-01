@@ -53,7 +53,6 @@ date_data = db.Table('date_data', metadata,
                 )
 
 
-
 def exe(nam, email, num):
     starts = db.insert(data).values(Name=nam, email=email, Number=num)
     engine.execute(starts)

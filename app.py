@@ -53,7 +53,6 @@ app.register_blueprint(hall_in , url_prefix="/hall")
 def hall():
     return render_template('hall.html')
 
-#
 #Date shown for Users here------>
 app.register_blueprint(date_selection , url_prefix="/date_selection")
 @app.route('/date_shown', methods=['POST', 'GET'])
@@ -87,3 +86,6 @@ app.register_blueprint(blog_in , url_prefix="/blog_in")
 @app.route('/blog')
 def blog():
     return render_template('blog.html')
+
+if __name__=='__main__':
+    app.run(port=5001)

@@ -12,7 +12,7 @@
     {% block head%}
     {% endblock %}
 </head>
-<body style="background-color: black; color: antiquewhite;">
+<body style="background-color: black; color: white;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="{{ url_for('hel')}}" >Marrige Palace</a>
@@ -45,54 +45,46 @@
     </nav>
     <hr>
 
-
-    <h3>This is Home </h3>
-
-
 <!--1 This Block For Resistration For Client-->
-    {% block content %}
-
-    {% endblock %}
+  {% block content %}
 
 <!--2 This Block For Hall Related Information-->
-    {% block hall %}
-
-    {% endblock %}
+  {% block hall %}
 
 <!--3 This Block For Date Ability related-->
-    {% block date_shown %}
-
-    {% endblock %} 
+  {% block date_shown %} 
 
 <!--4 This Block For Function Type-->
-    {% block fuction %}
-
-    {% endblock %}
+  {% block fuction %}
 
 <!--5 This Block For Booking -->
-    {% block booking %}
-
-    {% endblock %}
+  {% block booking %}
 
 <!--6 This Block For Booking -->
-    {% block menu %}
-
-    {% endblock %}
+  {% block menu %}
 
 <!--7 This Block For blog Type-->
-    {% block blog %}
-
-    {% endblock %}
+  {% block blog %}
 
 <!--8 This Block for Login-->
-    {% block login %}
-    
-    {% endblock %}
+  {% block login %}
 
 <!--9 This Block for creating blog-->
-    {% block create_blog %}
+  {% block create_blog %}
 
-    {% endblock %}
+
+  <h3>This is Home </h3>
+
+
+  {% endblock %}
+  {% endblock %}
+  {% endblock %}
+  {% endblock %}
+  {% endblock %}
+  {% endblock %}
+  {% endblock %}
+  {% endblock %}
+  {% endblock %}
 
 
 {% block footer%}
